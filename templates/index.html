@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football Site</title>
+    <style>
+        /* Existing styles */
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .information-button {
+            background-color: yellow;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Existing code for ranking and matches sections -->
+
+    <div class="button-container">
+        <a href="/details" class="rt-button">Информация</a>
+    </div>
+
+</body>
+</html>
+
+<h1 style="color: yellow;">ППЛ с.2022</h1>
+<style>
+    .container {
+        max-width: 570px;
+        margin: 0 auto;
+    }
+</style>
+
+<style>
+    body {
+        background-color: green;
+    }
+</style>
+
+<style>
+    body {
+        background-color: green;
+    }
+
+    .section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="section">
+            <h1>Класиране</h1>
+            <table class="ranking-table">
+                <tr>
+                    <th>Позиция</th>
+                    <th>Отбор</th>
+                    <th>Точки</th>
+                </tr>
+                {% for team in teams %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ team.name }}</td>
+                    <td>{{ team.points }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="section">
+            <h1>Мачове</h1>
+            <div class="matches-container">
+                <table class="matches-table">
+                    <tr>
+                        <th>Кръг</th>
+                        <th>Домакин</th>
+                        <th>Гост</th>
+                        <th>Резултат</th>
+                        <th>Дата</th>
+                    </tr>
+                    {% for match in matches %}
+                    {% if match.round == current_round %}
+                    <tr>
+                        <td>{{ match.round }}</td>
+                        <td>{{ match.team1 }}</td>
+                        <td>{{ match.team2 }}</td>
+                        <td>{{ match.score1 }} - {{ match.score2 }}</td>
+                        <td>{{ match.date }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+                <div class="navigation-buttons">
+                    {% if current_round > 1 %}
+                    <button class="arrow-button" onclick="navigateRound({{ current_round - 1 }})">&larr;</button>
+                    {% endif %}
+                    {% if current_round < max_round %}
+                    <button class="arrow-button" onclick="navigateRound({{ current_round + 1 }})">&rarr;</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function navigateRound(round) {
+            window.location.href = "/?round=" + round;
+        }
+    </script>
+</body>
+
